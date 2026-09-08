@@ -11,7 +11,7 @@ import {
   CheckCircleOutlined,
   LockFilled
 } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { apiClient } from '../services/apiClient';
 
@@ -19,6 +19,7 @@ const { Title, Paragraph, Text } = Typography;
 
 export const LoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -41,7 +42,7 @@ export const LoginPage = () => {
       setLoading(false);
       if (res.success) {
         message.success(`Welcome back, ${res.user.name} (${res.user.designation})`);
-        navigate(res.user.defaultRoute || '/command-center');
+        navigate(location.state?.from || res.user.defaultRoute || '/command-center', { replace: true });
       } else {
         message.error(res.message || 'Invalid User ID or Password.');
         refreshCaptcha();
