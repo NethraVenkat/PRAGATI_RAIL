@@ -199,6 +199,24 @@ html, body, #root {
   overflow-x: hidden;
 }
 
+/* Keep every routed page inside the usable viewport after the fixed rail/header. */
+.ant-layout,
+.ant-layout-content,
+.ant-layout > .ant-layout {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.app-shell-content > * {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.ant-table-container,
+.ant-table-content {
+  max-width: 100%;
+}
+
 /* Ant Design Tables: allow smooth horizontal scroll on small screens instead
    of clipping columns. Works together with the scroll={{x:'max-content'}}
    prop already set on most tables in this app. */

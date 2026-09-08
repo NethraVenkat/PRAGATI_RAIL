@@ -52,6 +52,10 @@ export const AppShell = ({ children, isDarkMode, setIsDarkMode }) => {
   useEffect(() => {
     setMobileDrawerOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMobile && screens.xl === false) setCollapsed(true);
+  }, [isMobile, screens.xl]);
   const { currentUser, logout, hasPermission } = useAuth();
   const {
     selectedZone,
@@ -345,7 +349,8 @@ export const AppShell = ({ children, isDarkMode, setIsDarkMode }) => {
           margin: isMobile ? '12px 8px' : '20px',
           paddingTop: 76,
           minHeight: 'calc(100vh - 20px)',
-          overflowX: 'hidden'
+          overflowX: 'auto',
+          minWidth: 0
         }}>
           {children}
         </Content>

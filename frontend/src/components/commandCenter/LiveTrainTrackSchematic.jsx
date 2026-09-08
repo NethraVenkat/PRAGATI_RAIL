@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { Card, Tag, Tooltip, Button, Segmented, Space, Badge, Progress } from 'antd';
 import {
   AimOutlined,
@@ -119,13 +119,6 @@ export const LiveTrainTrackSchematic = ({ liveData }) => {
       }
     }
   };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      centerOnTrain();
-    }, 150);
-    return () => clearTimeout(timer);
-  }, [trainNumber, resolvedCurrentIndex, routeMode]);
 
   const progressPercent = totalDistance > 0 && distanceFromOriginKm > 0
     ? Math.min(100, Math.max(0, Math.round((distanceFromOriginKm / totalDistance) * 100)))
