@@ -226,6 +226,9 @@ export const AppShell = ({ children, isDarkMode, setIsDarkMode }) => {
             left: 0,
             top: 0,
             height: '100vh',
+            width: collapsed ? 80 : 250,
+            minWidth: collapsed ? 80 : 250,
+            maxWidth: collapsed ? 80 : 250,
             zIndex: 100,
             overflow: 'hidden'
           }}
@@ -248,7 +251,15 @@ export const AppShell = ({ children, isDarkMode, setIsDarkMode }) => {
         </Drawer>
       )}
 
-      <Layout style={!isMobile ? { marginLeft: collapsed ? 80 : 250, minWidth: 0 } : undefined}>
+      <Layout
+        className="app-shell-main-layout"
+        style={!isMobile ? {
+          marginLeft: collapsed ? 80 : 250,
+          paddingLeft: 1,
+          minWidth: 0,
+          width: `calc(100% - ${collapsed ? 80 : 250}px)`
+        } : undefined}
+      >
         {/* Header Bar */}
         <Header className="app-shell-header" style={{
           padding: isMobile ? '8px 12px' : '8px 24px',
