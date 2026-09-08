@@ -665,7 +665,8 @@ export const GISGoogleMap = ({
       // Leaflet Tracks (Dual-layer railway styling; dashed amber = approximate)
       if (activeLayers.includes('tracks') && tracks && tracks.length > 0) {
         tracks.forEach(track => {
-          const latLngs = (track.coordinates || []).map(pt => [pt.lat, pt.lng]);
+          const latLngs = getTrackCoordinates(track).map(point => [point.lat, point.lng]);
+          if (latLngs.length < 2) return;
           const isApproximate = track.dataQuality === 'approximate';
           const coreColor = isApproximate ? '#d97706' : '#0284c7';
 
@@ -708,7 +709,9 @@ export const GISGoogleMap = ({
       // Leaflet Stations
       if (activeLayers.includes('stations') && stations && stations.length > 0) {
         stations.forEach(station => {
-          const marker = L.circleMarker([station.lat, station.lng], {
+          const position = toCoordinate(station.lat, station.lng);
+          if (!position) return;
+          const marker = L.circleMarker([position.lat, position.lng], {
             radius: 5,
             fillColor: '#0f172a',
             color: '#ffffff',
@@ -734,13 +737,15 @@ export const GISGoogleMap = ({
       // Leaflet Defects
       if (activeLayers.includes('defects') && defects && defects.length > 0) {
         defects.forEach(defect => {
+          const position = toCoordinate(defect.latitude, defect.longitude);
+          if (!position) return;
           let color = '#3b82f6';
           const sev = String(defect.severityLevel || defect.severity || '').toUpperCase();
           if (sev.includes('CRITICAL')) color = '#dc2626';
           else if (sev.includes('HIGH')) color = '#ea580c';
           else if (sev.includes('MEDIUM')) color = '#eab308';
 
-          const marker = L.circleMarker([defect.latitude, defect.longitude], {
+          const marker = L.circleMarker([position.lat, position.lng], {
             radius: 8,
             fillColor: color,
             color: '#ffffff',
@@ -765,7 +770,9 @@ export const GISGoogleMap = ({
 
       // Leaflet Live Train
       if (activeLayers.includes('trains') && liveTrain && liveTrain.lat && liveTrain.lng) {
-        const marker = L.circleMarker([liveTrain.lat, liveTrain.lng], {
+        const position = toCoordinate(liveTrain.lat, liveTrain.lng);
+        if (!position) return;
+        const marker = L.circleMarker([position.lat, position.lng], {
           radius: 10,
           fillColor: '#10b981',
           color: '#ffffff',
