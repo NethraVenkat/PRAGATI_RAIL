@@ -246,7 +246,7 @@ export const AppShell = ({ children, isDarkMode, setIsDarkMode }) => {
 
       <Layout style={!isMobile ? { marginLeft: collapsed ? 80 : 250, minWidth: 0 } : undefined}>
         {/* Header Bar */}
-        <Header style={{
+        <Header className="app-shell-header" style={{
           padding: isMobile ? '8px 12px' : '8px 24px',
           height: 'auto',
           minHeight: 64,
@@ -341,7 +341,7 @@ export const AppShell = ({ children, isDarkMode, setIsDarkMode }) => {
         </Header>
 
         {/* Viewport Content */}
-        <Content style={{
+        <Content className="app-shell-content" style={{
           margin: isMobile ? '12px 8px' : '20px',
           paddingTop: 76,
           minHeight: 'calc(100vh - 20px)',

@@ -213,7 +213,11 @@ export const GISGoogleMap = ({
         const MapClass = mapsLibRef.current?.Map || window.google?.maps?.Map;
         const InfoWindowClass = mapsLibRef.current?.InfoWindow || window.google?.maps?.InfoWindow;
 
-        if (googleMapRef.current && !mapInstanceRef.current && MapClass) {
+        if (!MapClass) {
+          throw new Error('Google Maps loaded without a map constructor');
+        }
+
+        if (googleMapRef.current && !mapInstanceRef.current) {
           const map = new MapClass(googleMapRef.current, {
             center,
             zoom: 10,

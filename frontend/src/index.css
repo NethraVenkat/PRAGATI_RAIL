@@ -203,6 +203,11 @@ html, body, #root {
    of clipping columns. Works together with the scroll={{x:'max-content'}}
    prop already set on most tables in this app. */
 @media (max-width: 991px) {
+  /* The fixed mobile header wraps into multiple rows; reserve its full height. */
+  .app-shell-content {
+    padding-top: 152px !important;
+  }
+
   .ant-table-wrapper {
     width: 100%;
     overflow-x: auto;

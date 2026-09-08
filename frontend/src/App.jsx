@@ -64,6 +64,8 @@ export function App() {
                       <Route path="/overview" element={<ProtectedRoute><DashboardPage userRole={userRole} /></ProtectedRoute>} />
                       <Route path="/ai-responses" element={<ProtectedRoute><AIResponsesPage userRole={userRole} /></ProtectedRoute>} />
                       <Route path="/digital-twin" element={<ProtectedRoute><GISInfrastructureMapPage userRole={userRole} /></ProtectedRoute>} />
+                      <Route path="/DIGITAL_TWIN" element={<ProtectedRoute><GISInfrastructureMapPage userRole={userRole} /></ProtectedRoute>} />
+                      <Route path="/digital_twin" element={<ProtectedRoute><GISInfrastructureMapPage userRole={userRole} /></ProtectedRoute>} />
                       <Route path="/gis-map" element={<ProtectedRoute><GISInfrastructureMapPage userRole={userRole} /></ProtectedRoute>} />
                       <Route path="/station-board" element={<ProtectedRoute><StationDisplayBoardPage userRole={userRole} /></ProtectedRoute>} />
                       <Route path="/tms" element={<ProtectedRoute><TMSManagerPage userRole={userRole} /></ProtectedRoute>} />
